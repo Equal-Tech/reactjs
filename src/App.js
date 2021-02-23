@@ -3,42 +3,35 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import Library from "./components/Library/Library";
 import ItemPage from "./components/ItemPage/ItemPage";
-import { getLibraries } from "./services/libraryServices";
 
 function App() {
-  const libraries = getLibraries();
-  // let x = 10;
-  const [x, setX] = useState(10);
+  const [libraries, setLibraries] = useState();
   const [user, setUser] = useState("User");
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
-    document.title = `Your count ${x}`;
-  }, [x]);
+    setIsLoading(true);
+    fetch("https://601598ce55dfbd00174ca670.mockapi.io/libraries")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLibraries(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(`Error has occured: ${error}`);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <Router>
       <div className="App">
-        {/* OPTIONALLY REMOVE THIS CODE!!! */}
-        {/* <p>{x}</p>
-        <button
-          onClick={() => {
-            x += 5;
-            console.log("Setting x to: ", x);
-          }}
-        >
-          Add 5
-        </button> */}
-
-        <p>{x}</p>
-        <button
-          onClick={() => {
-            setX(x + 5);
-            console.log("Setting x to: ", x);
-          }}
-        >
-          Add 5
-        </button>
-
         {/* the divs with styling are optional to make it look nicer */}
         <nav className="flex">
           <div className="flex link-container">
@@ -58,15 +51,18 @@ function App() {
               <h1>React Library Store</h1>
             </header>
             <main>
-              {libraries.map((library) => {
-                return (
-                  <Library
-                    key={library.id}
-                    name={library.name}
-                    id={library.id}
-                  />
-                );
-              })}
+              {isLoading && <p>Loading...</p>}
+              {error && <p> {error} </p>}
+              {libraries &&
+                libraries.map((library) => {
+                  return (
+                    <Library
+                      key={library.id}
+                      name={library.name}
+                      id={library.id}
+                    />
+                  );
+                })}
             </main>
             <footer></footer>
           </Route>

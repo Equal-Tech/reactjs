@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getLibraryItemDetails } from "../../services/libraryServices";
 import { useParams, useHistory } from "react-router-dom";
 
 const ItemPage = () => {
   const { id } = useParams();
-  const item = getLibraryItemDetails(id);
+  const [item, setItem] = useState();
   const history = useHistory();
-
   const [timeOnPage, setTimeOnPage] = useState(0);
+  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
     const timeOnPageInterval = setInterval(
@@ -18,17 +18,41 @@ const ItemPage = () => {
     return () => clearTimeout(timeOnPageInterval);
   }, []);
 
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(`https://601598ce55dfbd00174ca670.mockapi.io/libraries/1/items/${id}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setItem(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(`Error has occurred: ${error}`);
+        setIsLoading(false);
+      });
+  }, [id]);
+
   return (
     <>
-      <div className="list-item-title">Name: {item.title}</div>
-      <div className="list-item-author">Author: {item.author}</div>
-      {item.genre ? (
-        <div className="list-item-genre">Genre: {item.genre}</div>
-      ) : (
-        ""
+      {isLoading && <p>Loading...</p>}
+      {error && <p>There was an error: {error}</p>}
+      {item && (
+        <>
+          <div className="list-item-title">Name: {item.name}</div>
+          <div className="list-item-author">Author: {item.creator}</div>
+          {item.genre ? (
+            <div className="list-item-genre">Genre: {item.genre}</div>
+          ) : (
+            ""
+          )}
+        </>
       )}
       <button onClick={() => history.push("/")}>Back</button>
-
       <div>You've spent {timeOnPage} seconds on this page.</div>
     </>
   );
