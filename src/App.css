@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link-container a {
+  padding: 20px;
+}
+
+.nav-profile button {
+  margin: 10px;
+}

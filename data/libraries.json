@@ -1,0 +1,76 @@
+{
+  "libraries": [
+    {
+      "id": "d0b9060d-7253-4af7-a332-80077efb30c6",
+      "name": "Books",
+      "items": [
+        {
+          "id": "332163cd-cd8e-42da-9f3e-b09cf4eab85d",
+          "title": "Harry Potter and the Chamber of Secrets",
+          "author": "J. K. Rowling",
+          "genre": "Fantasy"
+        },
+        {
+          "id": "503ef765-913d-4aa7-8fc2-9c18f0325948",
+          "title": "The Hobbit",
+          "author": "J. R. R. Tolkien",
+          "genre": "Fantasy"
+        },
+        {
+          "id": "aaf3c756-f143-4449-a738-abf69cdf84f5",
+          "title": "Jane Eyre",
+          "author": "Charlotte Brontë",
+          "genre": "Romance"
+        }
+      ]
+    },
+    {
+      "id": "d0b9060d-7253-4af7-a332-80077efb30c5",
+      "name": "Films",
+      "items": [
+        {
+          "id": "332163cd-cd8e-42da-9f3e-b09cf4eab85a",
+          "title": "Harry Potter and the Chamber of Secrets",
+          "author": "J. K. Rowling",
+          "genre": "Fantasy"
+        },
+        {
+          "id": "503ef765-913d-4aa7-8fc2-9c18f0325944",
+          "title": "The Hobbit",
+          "author": "J. R. R. Tolkien",
+          "genre": "Fantasy"
+        },
+        {
+          "id": "aaf3c756-f143-4449-a738-abf69cdf84f1",
+          "title": "The Matrix",
+          "author": "The Wachowskis",
+          "genre": "Action"
+        }
+      ]
+    },
+    {
+      "id": "d0b9060d-7253-4af7-a332-80077efb30aa",
+      "name": "Food",
+      "items": [
+        {
+          "id": "332163cd-cd8e-42da-9f3e-b09cf4eab8aa",
+          "title": "Carrot",
+          "author": "Asda",
+          "genre": "Vegetables"
+        },
+        {
+          "id": "503ef765-913d-4aa7-8fc2-9c18f03259aa",
+          "title": "Parsnips",
+          "author": "Tesco",
+          "genre": "Vegetables"
+        },
+        {
+          "id": "aaf3c756-f143-4449-a738-abf69cdf84aa",
+          "title": "Vanilla Cheesecake",
+          "author": "Aldi",
+          "genre": "Deserts"
+        }
+      ]
+    }
+  ]
+}
