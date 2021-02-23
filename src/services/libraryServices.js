@@ -1,11 +1,11 @@
-const libraryJson = require("../../data/libraries.json");
+const libraryJson = require("../data/libraries.json");
 
 export const getLibraries = () => {
   const libraries = libraryJson.libraries;
   return libraries.map((library) => {
     return {
       id: library.id,
-      name: library.name
+      name: library.name,
     };
   });
 };
@@ -21,7 +21,7 @@ export const getLibraryItems = (id) => {
     return {
       id: item.id,
       title: item.title,
-      author: item.author
+      author: item.author,
     };
   });
 };
@@ -38,7 +38,7 @@ export const getLibraryItemDetails = (id) => {
       return {
         title: libraryItem.title,
         author: libraryItem.author,
-        genre: libraryItem.genre
+        genre: libraryItem.genre,
       };
     }
   }
@@ -46,6 +46,6 @@ export const getLibraryItemDetails = (id) => {
   return {
     title: "",
     author: "",
-    genre: ""
+    genre: "",
   }; // 6
 };

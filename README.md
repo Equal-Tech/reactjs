@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## To Run the app
+
+_If you haven't, install npm (node package manager)_
+
+1. Clone the repo `git clone git@github.com:Equal-Tech/reactjs.git` (if using SSH)
+2. Install all dependencies `yarn install`.
+3. Run the app `yarn start`.
+
+In case the page has not loaded by itself, open your browser and go to [http://localhost:3000](http://localhost:3000).
+
 ## Available Scripts
 
 In the project directory, you can run:
