@@ -3,31 +3,11 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import Library from "./components/Library/Library";
 import ItemPage from "./components/ItemPage/ItemPage";
+import GetLibraries from "./hooks/getLibraries";
 
 function App() {
-  const [libraries, setLibraries] = useState();
   const [user, setUser] = useState("User");
-  const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState();
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch("https://601598ce55dfbd00174ca670.mockapi.io/libraries")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setLibraries(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(`Error has occured: ${error}`);
-        setIsLoading(false);
-      });
-  }, []);
+  const { libraries, isLoading, error } = GetLibraries();
 
   return (
     <Router>
@@ -60,6 +40,7 @@ function App() {
                       key={library.id}
                       name={library.name}
                       id={library.id}
+                      items={library.items}
                     />
                   );
                 })}
@@ -84,7 +65,7 @@ function App() {
             </main>
             <footer></footer>
           </Route>
-          <Route path="/item/:id">
+          <Route path="/library/:libraryId/item/:id">
             <ItemPage />
           </Route>
         </Switch>

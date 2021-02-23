@@ -1,8 +1,7 @@
 import React from "react";
-import { getLibraryItemDetails } from "../../services/libraryServices";
 import { useHistory } from "react-router-dom";
 
-const LibraryItem = ({ id, title }) => {
+const LibraryItem = ({ id, libraryId, title }) => {
   const history = useHistory();
 
   return (
@@ -10,7 +9,9 @@ const LibraryItem = ({ id, title }) => {
       <p className="list-item-title">
         <b>Title:</b> {title}
       </p>
-      <button onClick={() => history.push(`/item/${id}`)}>View</button>
+      <button onClick={() => history.push(`library/${libraryId}/item/${id}`)}>
+        View
+      </button>
     </div>
   );
 };
