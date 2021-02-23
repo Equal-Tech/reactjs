@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import "./App.css";
 import Library from "./components/Library/Library";
 import ItemPage from "./components/ItemPage/ItemPage";
-import GetLibraries from "./hooks/getLibraries";
+import UseLibraries from "./hooks/useLibraries";
+import LibraryForm from "./components/LibraryForm/LibraryForm";
+import ContactUsForm from "./components/ContactUsForm/ContactUsForm";
+import FeedbackPage from "./components/FeedbackPage/FeedbackPage";
 
 function App() {
+  const { libraries, error, isLoading } = UseLibraries();
   const [user, setUser] = useState("User");
-  const { libraries, isLoading, error } = GetLibraries();
 
   return (
     <Router>
       <div className="App">
-        {/* the divs with styling are optional to make it look nicer */}
         <nav className="flex">
           <div className="flex link-container">
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/contact-us">Contact us</Link>
+            <Link to="/feedback">Feedback</Link>
           </div>
 
           <div className="flex nav-profile">
@@ -31,16 +34,18 @@ function App() {
               <h1>React Library Store</h1>
             </header>
             <main>
+              <h2>Add a New Library</h2>
+              <LibraryForm />
               {isLoading && <p>Loading...</p>}
               {error && <p> {error} </p>}
               {libraries &&
                 libraries.map((library) => {
                   return (
                     <Library
+                      items={library.items}
                       key={library.id}
                       name={library.name}
                       id={library.id}
-                      items={library.items}
                     />
                   );
                 })}
@@ -61,12 +66,15 @@ function App() {
               <h1>Contact</h1>
             </header>
             <main>
-              <p>Contact us page</p>
+              <ContactUsForm />
             </main>
             <footer></footer>
           </Route>
           <Route path="/library/:libraryId/item/:id">
             <ItemPage />
+          </Route>
+          <Route path="/feedback">
+            <FeedbackPage />
           </Route>
         </Switch>
       </div>

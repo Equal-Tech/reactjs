@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-const GetLibraries = () => {
+const UseLibraries = () => {
   const [libraries, setLibraries] = useState();
   const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch("https://601598ce55dfbd00174ca670.mockapi.io/libraries")
       .then((response) => {
         if (!response.ok) {
@@ -30,4 +31,4 @@ const GetLibraries = () => {
   };
 };
 
-export default GetLibraries;
+export default UseLibraries;

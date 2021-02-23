@@ -1,17 +1,19 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-const LibraryItem = ({ id, libraryId, title }) => {
+const LibraryItem = ({ id, title, libraryId }) => {
   const history = useHistory();
+
+  const handleViewClick = () => {
+    history.push(`/library/${libraryId}/item/${id}`);
+  };
 
   return (
     <div className="list-item">
       <p className="list-item-title">
         <b>Title:</b> {title}
       </p>
-      <button onClick={() => history.push(`library/${libraryId}/item/${id}`)}>
-        View
-      </button>
+      <button onClick={handleViewClick}>View</button>
     </div>
   );
 };

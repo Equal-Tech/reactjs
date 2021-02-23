@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-const GetLibraryItem = (libraryId, itemId) => {
+const UseItem = (id, libraryId) => {
   const [item, setItem] = useState();
   const [error, setError] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `https://601598ce55dfbd00174ca670.mockapi.io/libraries/${libraryId}/items/${itemId}`
+      `https://601598ce55dfbd00174ca670.mockapi.io/libraries/${libraryId}/items/${id}`
     )
       .then((response) => {
         if (!response.ok) {
@@ -24,13 +24,13 @@ const GetLibraryItem = (libraryId, itemId) => {
         setError(`Error has occurred: ${error}`);
         setIsLoading(false);
       });
-  }, [libraryId, itemId]);
+  }, [id, libraryId]);
 
   return {
     item: item,
-    isLoading: isLoading,
-    error: error
+    error: error,
+    isLoading: isLoading
   };
 };
 
-export default GetLibraryItem;
+export default UseItem;
